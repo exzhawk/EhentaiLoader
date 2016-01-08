@@ -12,4 +12,11 @@
     * Multi thread, async download
     * Detect download limit
     * Batch download
+    
+## Techs
 
+* Scrapy for crawl content
+* Tornado for backend
+* AngularJS for frontend
+* Material Design for Style
+* WebSocket for communication
