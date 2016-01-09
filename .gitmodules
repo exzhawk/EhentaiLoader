@@ -1,0 +1,3 @@
+[submodule "static/DragMultiSelect"]
+	path = static/DragMultiSelect
+	url = https://github.com/exzhawk/DragMultiSelect.git
