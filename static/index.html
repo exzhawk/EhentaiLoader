@@ -3,60 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <title>EhentaiLoader</title>
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="css/bootstrap-theme.css">
+    <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.teal-red.min.css">
+    <!--<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">-->
     <link rel="stylesheet" href="app.css">
 </head>
 <body>
-<nav class="navbar navbar-default navbar-fixed-top" ng-controller="NavBar as nav_bar">
-    <div class="container">
-        <a href="#" class="navbar-brand">
-            EhentaiLoader
-            <span class="badge">{{nav_bar.queue_count}}</span>
-        </a>
-        <form class="navbar-form navbar-left" role="search" ng-submit="nav_bar.do_search()">
-            <div class="form-group">
-                <input type="text" placeholder="Search" class="form-control" id="search_text"
-                       ng-model="nav_bar.search_keyword">
-            </div>
-            <button type="submit" class="btn btn-default" id="search_button">
-                Submit
-            </button>
-        </form>
-        <button class="btn btn-default navbar-btn" type="button" id="download_button" role="button">
-            Download
-            <span class="badge">{{nav_bar.download_count}}</span>
-        </button>
-    </div>
-</nav>
-<div class="container-fluid">
-    <div class="modal" id="loginModal" ng-controller="LoginModal as login_modal">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <form ng-submit="login_modal.do_login()">
-                        <div class="form-group">
-                            <input type="text" placeholder="Username" class="form-control" id="username"
-                                   ng-model="login_modal.username">
-                        </div>
-                        <div class="form-group">
-                            <input type="password" placeholder="Password" class="form-control" id="password"
-                                   ng-model="login_modal.password">
-                        </div>
-                        <button type="submit" class="btn btn-default">Login</button>
-                    </form>
+
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <header class="mdl-layout__header">
+        <div class="mdl-layout__header-row">
+            <span class="mdl-layout-title">EhentaiLoader</span>
+            <form id="search-form">
+                <div class="mdl-textfield mdl-js-textfield">
+                    <input class="mdl-textfield__input" type="text" id="search-input" placeholder="Keyword">
                 </div>
+            </form>
+            <button id="search-btn" class="mdl-button mdl-js-button mdl-js-ripple-effect">
+                Search
+            </button>
+            <!-- Add spacer, to align navigation to the right -->
+            <div class="mdl-layout-spacer"></div>
+            <button id="selectAll" class="mdl-button mdl-js-button mdl-js-ripple-effect">
+                All
+            </button>
+            <button id="deselectAll" class="mdl-button mdl-js-button mdl-js-ripple-effect">
+                None
+            </button>
+            <button id="selectReverse" class="mdl-button mdl-js-button mdl-js-ripple-effect">
+                Reverse
+            </button>
+            <div class="mdl-layout-spacer"></div>
+            <span id="selection-count" class="mdl-badge" data-badge="0">
+                <button id="download-btn" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                    Download
+                </button>
+            </span>
+        </div>
+    </header>
+    <div class="mdl-layout__drawer">
+        <span class="mdl-layout-title">EhentaiLoader</span>
+
+    </div>
+    <main class="mdl-layout__content">
+        <div class="page-content">
+            <div class="posts-wrapper">
+                <!-- post 1 here -->
+                <!-- post 2 here -->
             </div>
         </div>
-    </div>
-    <div id="posts-wrapper">
-    </div>
+    </main>
 </div>
 
+
 <script src="js/jquery-1.11.3.js" type="text/javascript"></script>
-<script src="js/bootstrap.js" type="text/javascript"></script>
+<script src="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.min.js"></script>
 <script src="DragMultiSelect/js/DragMultiSelect.js" type="text/javascript"></script>
-<script src="js/angular.js" type="text/javascript"></script>
+<script src="js/vue.js" type="text/javascript"></script>
 <script src="app.js" type="text/javascript"></script>
 </body>
 </html>
