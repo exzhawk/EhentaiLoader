@@ -1,4 +1,15 @@
 body {
   padding-top: 70px; }
+  body nav .container {
+    display: flex; }
+    body nav .container form {
+      flex: 1;
+      display: flex; }
+      body nav .container form .form-group {
+        flex: 1; }
+        body nav .container form .form-group input {
+          width: 100%; }
+  body .modal-backdrop.in {
+    opacity: 1 !important; }
 
 /*# sourceMappingURL=app.css.map */

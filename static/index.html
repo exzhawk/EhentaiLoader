@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="ehentaiLoaderApp">
 <head>
     <meta charset="UTF-8">
     <title>EhentaiLoader</title>
@@ -8,24 +8,50 @@
     <link rel="stylesheet" href="app.css">
 </head>
 <body>
-<nav class="navbar navbar-default navbar-fixed-top">
+<nav class="navbar navbar-default navbar-fixed-top" ng-controller="NavBar as nav_bar">
     <div class="container">
         <a href="#" class="navbar-brand">
             EhentaiLoader
-            <span class="badge">233</span>
+            <span class="badge">{{nav_bar.queue_count}}</span>
         </a>
-        <form class="navbar-form navbar-left" role="search">
+        <form class="navbar-form navbar-left" role="search" ng-submit="nav_bar.do_search()">
             <div class="form-group">
-                <input type="text" placeholder="Search" class="form-control">
+                <input type="text" placeholder="Search" class="form-control" id="search_text"
+                       ng-model="nav_bar.search_keyword">
             </div>
-            <button type="submit" class="btn btn-default">Submit</button>
+            <button type="submit" class="btn btn-default" id="search_button">
+                Submit
+            </button>
         </form>
-        <button class="btn btn-default navbar-btn" type="button" role="button" href="#">
+        <button class="btn btn-default navbar-btn" type="button" id="download_button" role="button">
             Download
-            <span class="badge">4</span>
+            <span class="badge">{{nav_bar.download_count}}</span>
         </button>
     </div>
 </nav>
+<div class="container-fluid">
+    <div class="modal" id="loginModal" ng-controller="LoginModal as login_modal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <form ng-submit="login_modal.do_login()">
+                        <div class="form-group">
+                            <input type="text" placeholder="Username" class="form-control" id="username"
+                                   ng-model="login_modal.username">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" placeholder="Password" class="form-control" id="password"
+                                   ng-model="login_modal.password">
+                        </div>
+                        <button type="submit" class="btn btn-default">Login</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="post-wrapper">
+    </div>
+</div>
 
 <script src="js/jquery-1.11.3.js" type="text/javascript"></script>
 <script src="js/bootstrap.js" type="text/javascript"></script>

@@ -1,3 +1,21 @@
-body{
+body {
   padding-top: 70px;
+  nav{
+    .container{
+      display: flex;
+      form{
+        flex: 1;
+        display: flex;
+        .form-group{
+          flex: 1;
+          input{
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+  .modal-backdrop.in{
+    opacity: 1 !important;
+  }
 }
