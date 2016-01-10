@@ -1,14 +1,16 @@
 ehentaiLoaderApp = angular.module 'ehentaiLoaderApp', []
 
 ehentaiLoaderApp.controller 'NavBar', ['$http', ($http) ->
-  this.queue_count = 233
-  this.download_count = 233
+  this.queue_count = 0
+  this.download_count = 0
   this.search_keyword = ''
+  this.search_result = []
+  search_result = this.search_result
   this.do_search = ->
     $http
     .post('/search', q: this.search_keyword)
-    .success ->
-      console.log(233)
+    .success (data) ->
+      search_result=data['posts']
   this
 ]
 

@@ -6,14 +6,17 @@
 
   ehentaiLoaderApp.controller('NavBar', [
     '$http', function($http) {
-      this.queue_count = 233;
-      this.download_count = 233;
+      var search_result;
+      this.queue_count = 0;
+      this.download_count = 0;
       this.search_keyword = '';
+      this.search_result = [];
+      search_result = this.search_result;
       this.do_search = function() {
         return $http.post('/search', {
           q: this.search_keyword
-        }).success(function() {
-          return console.log(233);
+        }).success(function(data) {
+          return search_result = data['posts'];
         });
       };
       return this;
