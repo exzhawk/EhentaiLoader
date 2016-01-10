@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="ehentaiLoaderApp">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>EhentaiLoader</title>
-    <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.teal-red.min.css">
-    <!--<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">-->
+    <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.blue-red.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="app.css">
 </head>
 <body>
@@ -12,13 +12,13 @@
 <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
     <header class="mdl-layout__header">
         <div class="mdl-layout__header-row">
-            <span class="mdl-layout-title">EhentaiLoader</span>
-            <form id="search-form">
-                <div class="mdl-textfield mdl-js-textfield">
-                    <input class="mdl-textfield__input" type="text" id="search-input" placeholder="Keyword">
-                </div>
-            </form>
-            <button id="search-btn" class="mdl-button mdl-js-button mdl-js-ripple-effect">
+            <span id="queue-count" class="mdl-badge" data-badge="{{queueCount}}">
+                <span class="mdl-layout-title">EhentaiLoader</span>
+            </span>
+            <div class="mdl-textfield mdl-js-textfield">
+                <input class="mdl-textfield__input" type="text" placeholder="Keyword" v-model="searchKeyword">
+            </div>
+            <button id="search-btn" class="mdl-button mdl-js-button mdl-js-ripple-effect" v-on:click="doSearch">
                 Search
             </button>
             <!-- Add spacer, to align navigation to the right -->
@@ -33,7 +33,7 @@
                 Reverse
             </button>
             <div class="mdl-layout-spacer"></div>
-            <span id="selection-count" class="mdl-badge" data-badge="0">
+            <span id="selection-count" class="mdl-badge" data-badge="{{downloadCount}}">
                 <button id="download-btn" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
                     Download
                 </button>
@@ -42,10 +42,28 @@
     </header>
     <div class="mdl-layout__drawer">
         <span class="mdl-layout-title">EhentaiLoader</span>
-
     </div>
     <main class="mdl-layout__content">
         <div class="page-content">
+            <div class="mdl-card mdl-shadow--2dp login-card" id="login-card" v-show="noLogin">
+                <div class="mdl-card__title">
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <label for="username" class="mdl-textfield__label">Username</label>
+                        <input type="text" class="mdl-textfield__input" id="username" v-model="username">
+                    </div>
+                </div>
+                <div class="mdl-card__title">
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <label for="password" class="mdl-textfield__label">Password</label>
+                        <input type="password" class="mdl-textfield__input" id="password" v-model="password">
+                    </div>
+                </div>
+                <div class="mdl-card__actions mdl-card--border">
+                    <button type="button" class="mdl-button mdl-js-button mdl-js-ripple-effect" v-on:click="doLogin">
+                        Login
+                    </button>
+                </div>
+            </div>
             <div class="posts-wrapper">
                 <!-- post 1 here -->
                 <!-- post 2 here -->

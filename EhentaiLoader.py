@@ -17,14 +17,14 @@ base_urls = {
 ua = 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36'
 cookies = {}
 proxies = {
-    # 'http': 'http://127.0.0.1:8888',
-    # 'https': 'http://127.0.0.1:8088',
+    'http': 'http://127.0.0.1:8888',
+    'https': 'http://127.0.0.1:8088',
 }
 
 
 class SearchHandler(tornado.web.RequestHandler):
-    def post(self, *args, **kwargs):
-        keyword = json.loads(self.request.body).get('q')
+    def get(self, *args, **kwargs):
+        keyword = self.get_argument('q')
         r = requests.get(base_urls['search'], cookies=cookies, proxies=proxies,
                          data={"f_artistcg": "1", "f_non-h": "1", "f_gamecg": "1", "f_imageset": "1", "f_cosplay": "1",
                                "f_asianporn": "1", "f_manga": "1", "f_doujinshi": "1", "f_western": "1", "f_misc": "1",
@@ -39,7 +39,7 @@ class SearchHandler(tornado.web.RequestHandler):
             pic_count = post.xpath('./div[@class="id4"]/div[@class="id42"]/text()')[0]
             result_posts.append({'thumb_src': thumb_src, 'title': title, 'url': url, 'pic_count': pic_count})
         filtered_result = filter_result(result_posts)
-        self.write(json.dumps({'posts', filtered_result}))
+        self.write(json.dumps({'posts': filtered_result}))
 
 
 def filter_result(posts):
@@ -62,9 +62,8 @@ class LoginHandler(tornado.web.RequestHandler):
 
     def post(self, *args, **kwargs):
         is_login = False
-        user = json.loads(self.request.body)
-        username = user.get('username')
-        password = user.get('password')
+        username = self.get_argument('username')
+        password = self.get_argument('password')
         s = requests.Session()
         s.post(base_urls['login'], headers={'user-agent': ua, 'Content-Type': 'application/x-www-form-urlencoded'},
                data={'UserName': username, 'PassWord': password, 'submit': 'Log me in', 'CookieDate': 1,
