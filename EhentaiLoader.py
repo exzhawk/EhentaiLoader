@@ -15,20 +15,37 @@ base_urls = {
     'thumb_mode': 'http://exhentai.org/?inline_set=dm_t',
 }
 ua = 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36'
+accept = '*/*'
+accept_encoding = 'gzip, deflate, sdch'
+default_headers = {'user-agent': ua, 'accept': accept, 'accept_encoding': accept_encoding}
 cookies = {}
 proxies = {
     'http': 'http://127.0.0.1:8888',
-    'https': 'http://127.0.0.1:8088',
+    'https': 'http://127.0.0.1:8888',
 }
+
+
+def get_page(url, headers=None, data=None):
+    if headers is None:
+        headers = default_headers
+    else:
+        headers.update(default_headers)
+    r = requests.get(url=url,
+                     cookies=cookies,
+                     proxies=proxies,
+                     headers=headers,
+                     data=data
+                     )
+    return r
 
 
 class SearchHandler(tornado.web.RequestHandler):
     def get(self, *args, **kwargs):
         keyword = self.get_argument('q')
-        r = requests.get(base_urls['search'], cookies=cookies, proxies=proxies,
-                         data={"f_artistcg": "1", "f_non-h": "1", "f_gamecg": "1", "f_imageset": "1", "f_cosplay": "1",
-                               "f_asianporn": "1", "f_manga": "1", "f_doujinshi": "1", "f_western": "1", "f_misc": "1",
-                               "f_apply": "Apply Filter", "f_search": keyword})
+        r = get_page(base_urls['search'],
+                     data={"f_artistcg": "1", "f_non-h": "1", "f_gamecg": "1", "f_imageset": "1", "f_cosplay": "1",
+                           "f_asianporn": "1", "f_manga": "1", "f_doujinshi": "1", "f_western": "1", "f_misc": "1",
+                           "f_apply": "Apply Filter", "f_search": keyword})
         result_posts = []
         tree = etree.HTML(r.text)
         posts = tree.xpath('//div[@class="itg"]/div[@class="id1"]')
@@ -51,7 +68,8 @@ class LoginHandler(tornado.web.RequestHandler):
         is_login = False
         try:
             saved_cookies = cPickle.load(open(os.path.join(os.path.dirname(__file__), 'cookies.pkl'), 'rb'))
-            r = requests.get(base_urls['test_login'], cookies=saved_cookies, proxies=proxies)
+            r = requests.get(base_urls['test_login'], cookies=saved_cookies, proxies=proxies,
+                             headers={'user-agent': ua})
             if r.headers.get('content-type') is not 'image/gif':
                 is_login = True
                 global cookies
