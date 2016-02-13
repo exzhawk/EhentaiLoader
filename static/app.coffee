@@ -15,6 +15,7 @@ app = new Vue({
     init: ->
       this.checkLogin()
     doSearch: ->
+      $this=this
       $.ajax
         url: '/search'
         data:
@@ -22,7 +23,7 @@ app = new Vue({
         method: "GET"
         dataType: "json"
         success: (data) ->
-          this.searchResult = data['posts']
+          $this.searchResult = data['posts']
     checkLogin: ->
       $this = this
       $.ajax

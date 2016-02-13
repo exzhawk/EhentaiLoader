@@ -23,6 +23,8 @@
         return this.checkLogin();
       },
       doSearch: function() {
+        var $this;
+        $this = this;
         return $.ajax({
           url: '/search',
           data: {
@@ -31,7 +33,7 @@
           method: "GET",
           dataType: "json",
           success: function(data) {
-            return this.searchResult = data['posts'];
+            return $this.searchResult = data['posts'];
           }
         });
       },
