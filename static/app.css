@@ -1,4 +1,36 @@
 #login-card {
   margin: auto; }
 
+#posts-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start; }
+  #posts-wrapper .post_item {
+    width: 210px;
+    height: 310px;
+    margin: 0;
+    box-sizing: border-box;
+    border: solid 1px transparent;
+    box-shadow: inset 0 0 0 5px #BBDEFB;
+    padding: 5px;
+    background: no-repeat center; }
+    #posts-wrapper .post_item:before {
+      margin: -5px;
+      display: block;
+      text-align: center;
+      width: 20px;
+      color: #ffffff;
+      background-color: #BBDEFB;
+      content: '\2610'; }
+    #posts-wrapper .post_item span {
+      color: #000000;
+      background-color: #BBDEFB; }
+    #posts-wrapper .post_item.DragMultiSelect-selected {
+      box-shadow: inset 0 0 0 5px #2196F3; }
+      #posts-wrapper .post_item.DragMultiSelect-selected:before {
+        background-color: #2196F3 !important;
+        content: '\2714' !important; }
+      #posts-wrapper .post_item.DragMultiSelect-selected span {
+        background-color: #2196F3 !important; }
+
 /*# sourceMappingURL=app.css.map */

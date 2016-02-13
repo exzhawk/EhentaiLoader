@@ -1,3 +1,46 @@
-#login-card{
-  margin:auto;
+#login-card {
+  margin: auto;
+}
+
+$deepColor: #2196F3;
+$limeColor: #BBDEFB;
+
+#posts-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  .post_item {
+    width: 210px;
+    height: 310px;
+    margin: 0;
+    box-sizing: border-box;
+    border: solid 1px transparent;
+    box-shadow: inset 0 0 0 5px $limeColor;
+    padding: 5px;
+    background: no-repeat center;
+    &:before {
+      margin: -5px;
+      display: block;
+      text-align: center;
+      width: 20px;
+      color: #ffffff;
+      background-color: $limeColor;
+      content: '\2610';
+    }
+    span {
+      color: #000000;
+      background-color: $limeColor;
+    }
+    &.DragMultiSelect-selected {
+      //border: solid 5px $deepColor;
+      box-shadow: inset 0 0 0 5px $deepColor;
+      &:before {
+        background-color: $deepColor !important;
+        content: '\2714' !important;
+      }
+      span {
+        background-color: $deepColor !important;
+      }
+    }
+  }
 }

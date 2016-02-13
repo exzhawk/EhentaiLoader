@@ -64,7 +64,11 @@
                     </button>
                 </div>
             </div>
-            <div class="posts-wrapper">
+            <div id="posts-wrapper">
+                <div v-for="post in searchResult" class="post_item"
+                     v-bind:style="{background-url:'url('+post.thumb_src+')'}">
+                    <span>{{post.title}}</span>
+                </div>
                 <!-- post 1 here -->
                 <!-- post 2 here -->
             </div>
